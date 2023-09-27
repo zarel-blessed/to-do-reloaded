@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --clr-night-soul: rgba(13, 13, 13, 1);
+  --clr-glassparent: rgba(36, 36, 36, 0.2);
+  --clr-dark-aura: rgba(0, 0, 0, 1);
+  --clr-desaturated: rgb(177, 177, 177, 1);
+  --clr-evergreen: rgb(160, 170, 43, 1);
+
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+* {
+  border: none;
+  outline: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
