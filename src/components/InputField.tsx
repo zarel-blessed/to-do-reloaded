@@ -31,22 +31,23 @@ const InputField = ({ setTodos }: Props) => {
     };
 
     setTodos((prevTodos) => [...prevTodos, newTodo]);
+    setNewTask("");
   }
 
   return (
-    <form className="sm:flex justify-between gap-3 font-montserrat">
+    <form className="sm:flex justify-between gap-3 font-nunito">
       <input
         type="text"
         placeholder="Type in the Task..."
         value={newTask}
         onChange={(e) => handleChange(e)}
-        className="inline-block py-2 px-3 bg-desaturated w-[100%] placeholder:text-dark_aura placeholder:italic text-sm font-medium rounded-md"
+        className="inline-block py-3 px-3 bg-desaturated w-[100%] placeholder:text-dark_aura placeholder:italic text-sm font-medium rounded-md"
       />
       <input
         type="submit"
         value="Add"
         onClick={(e) => handleClick(e)}
-        className="inline-block relative left-[50%] sm:left-[0] py-2 px-6 mt-2 sm:mt-[0] sm:px-4 bg-evergreen text-sm font-medium rounded-md translate-x-[-50%] sm:translate-x-[0] cursor-pointer"
+        className="inline-block relative left-[50%] sm:left-[0] py-3 px-3 mt-2 sm:mt-[0] sm:px-6 bg-evergreen text-sm font-medium rounded-md translate-x-[-50%] sm:translate-x-[0] cursor-pointer"
       />
     </form>
   );

@@ -20,7 +20,7 @@ export default {
         evergreen: "var(--clr-evergreen)",
       },
       fontFamily: {
-        montserrat: "var(--font-montserrat)",
+        nunito: "var(--font-nunito)",
       },
     },
   },
