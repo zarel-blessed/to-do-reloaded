@@ -4,6 +4,7 @@ import TaskTile from "./components/TaskTile";
 
 export interface Todo {
   task: string;
+  isCompleted: boolean;
   id: number;
 }
 

@@ -27,6 +27,7 @@ const InputField = ({ setTodos }: Props) => {
   function updateTodo(task: string) {
     const newTodo: Todo = {
       task,
+      isCompleted: false,
       id: Date.now(),
     };
 

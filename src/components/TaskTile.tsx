@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Todo } from "../App";
 import { FaPencilAlt, FaTrash, FaCheck } from "react-icons/fa";
 
@@ -8,10 +8,9 @@ interface Props {
 }
 
 const TaskTile = ({ todo, setTodos }: Props) => {
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
-
   function handleComplete() {
-    setIsCompleted((prev) => !prev);
+    todo.isCompleted = !todo.isCompleted;
+    setTodos((prevTodos) => prevTodos.map((currentTodo: Todo) => currentTodo));
   }
 
   function handleDelete() {
@@ -25,7 +24,7 @@ const TaskTile = ({ todo, setTodos }: Props) => {
       <p
         className="relative font-nunito text-sm bullet-before"
         style={{
-          color: isCompleted ? "#777" : "#eee",
+          color: todo.isCompleted ? "#777" : "#eee",
         }}
       >
         {todo.task}
@@ -34,13 +33,15 @@ const TaskTile = ({ todo, setTodos }: Props) => {
         <div
           className="p-1 rounded w-5 h-5 transition cursor-pointer"
           style={{
-            backgroundColor: isCompleted ? "#333" : "var(--clr-desaturated)",
+            backgroundColor: todo.isCompleted
+              ? "#333"
+              : "var(--clr-desaturated)",
           }}
           onClick={handleComplete}
         >
           <FaCheck
             style={{
-              color: isCompleted ? "var(--clr-evergreen)" : "#334155",
+              color: todo.isCompleted ? "var(--clr-evergreen)" : "#334155",
             }}
           />
         </div>
