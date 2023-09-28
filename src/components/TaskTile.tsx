@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
+import {
+  ChangeEvent,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 import { Todo } from "../App";
 import { FaPencilAlt, FaTrash, FaCheck } from "react-icons/fa";
 
@@ -8,9 +14,27 @@ interface Props {
 }
 
 const TaskTile = ({ todo, setTodos }: Props) => {
+  const [updatedTask, setUpdatedTask] = useState<string>(todo.task);
+  const [toggled, setToggled] = useState<boolean>(false);
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setUpdatedTask(e.target.value);
+  }
+
   function handleComplete() {
     todo.isCompleted = !todo.isCompleted;
-    setTodos((prevTodos) => prevTodos.map((currentTodo: Todo) => currentTodo));
+    setTodos((prevTodos) => [...prevTodos]);
+  }
+
+  function handleUpdate(e: MouseEvent<HTMLInputElement>) {
+    e.preventDefault();
+    if (updatedTask !== "") todo.task = updatedTask;
+    setTodos((prevTodos) => [...prevTodos]);
+    setToggled((prev) => !prev);
+  }
+
+  function handleToggle() {
+    setToggled((prev) => !prev);
   }
 
   function handleDelete() {
@@ -32,11 +56,6 @@ const TaskTile = ({ todo, setTodos }: Props) => {
       <div className="flex gap-2">
         <div
           className="p-1 rounded w-5 h-5 transition cursor-pointer"
-          style={{
-            backgroundColor: todo.isCompleted
-              ? "#333"
-              : "var(--clr-desaturated)",
-          }}
           onClick={handleComplete}
         >
           <FaCheck
@@ -45,15 +64,40 @@ const TaskTile = ({ todo, setTodos }: Props) => {
             }}
           />
         </div>
-        <div className="p-1 bg-desaturated rounded w-5 h-5 cursor-pointer">
+        <div
+          className="p-1 rounded w-5 h-5 cursor-pointer"
+          onClick={handleToggle}
+        >
           <FaPencilAlt className="text-slate-700" />
         </div>
         <div
-          className="p-1 bg-desaturated rounded w-5 h-5 cursor-pointer"
+          className="p-1 rounded w-5 h-5 cursor-pointer"
           onClick={handleDelete}
         >
           <FaTrash className="text-slate-700" />
         </div>
+      </div>
+      <div
+        className="flex items-center justify-center fixed inset-[0] bg-slate-950 z-[100] transition-[top] duration-300"
+        style={{
+          top: toggled ? "0" : "150vh",
+        }}
+      >
+        <form className="sm:flex justify-between gap-3 font-nunito w-[500px]">
+          <input
+            type="text"
+            placeholder="Type in the Task..."
+            value={updatedTask}
+            onChange={(e) => handleChange(e)}
+            className="inline-block py-3 px-3 bg-desaturated w-[100%] placeholder:text-dark_aura placeholder:italic text-sm font-medium rounded-md"
+          />
+          <input
+            type="submit"
+            value="Update"
+            onClick={(e) => handleUpdate(e)}
+            className="inline-block relative left-[50%] sm:left-[0] py-3 px-3 mt-2 sm:mt-[0] sm:px-6 bg-evergreen text-sm font-medium rounded-md translate-x-[-50%] sm:translate-x-[0] cursor-pointer"
+          />
+        </form>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ function App() {
   console.log(todos);
 
   return (
-    <div className="flex items-center justify-center w-full h-screen bg-night_soul overflow-hidden isolate">
+    <div className="flex items-center justify-center w-full h-screen bg-slate-950 overflow-hidden isolate">
       <div className="relative p-6 bg-glassparent w-full max-w-[660px] rounded-lg ui-container">
         <InputField setTodos={setTodos} />
         <div className="bg-glassparent py-2 pl-5 pr-3 mt-5 h-[400px] rounded-md overflow-y-auto custom-scrollbar">
